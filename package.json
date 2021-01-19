@@ -1,0 +1,23 @@
+{
+  "name": "doslism-node-app",
+  "version": "1.0.0",
+  "description": "restful api",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walte4900/Doslism-Management-system.git"
+  },
+  "author": "Sven",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walte4900/Doslism-Management-system/issues"
+  },
+  "homepage": "https://github.com/walte4900/Doslism-Management-system#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
