@@ -28,6 +28,7 @@ router.post("/register", (req, res) => {
       name: req.body.name,
       email: req.body.email,
       avatar: avatar,
+      identity: req.body.identity,
       password: req.body.password,
     });
 
@@ -63,7 +64,13 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         // 规则 命名 过期时间 回调函数
-        const rule = {id:user.id, name:user.name};
+        const rule = {
+          id:user.id, 
+          email: user.email,
+          name:user.name,
+          avatar:user.avatar,
+          identity: user.identity
+        };
         const key = keys.secretOrKey;
         jwt.sign(rule,key,{expiresIn: 3600},(err,token)=>{
             res.json({
@@ -93,7 +100,9 @@ router.get("/current",passport.authenticate('jwt',{session:false}),
   res.json({
     id: req.user.id,
     email: req.user.email,
-    name: req.user.name
+    name: req.user.name,
+    avatar:req.user.avatar,
+    identity: req.user.identity
   });
 });
 

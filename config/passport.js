@@ -12,20 +12,17 @@ opts.secretOrKey = keys.secretOrKey;
 
 // 导出passport-jwt
 module.exports = (passport) => {
-  passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
-      // 查看是否有该id生成的jwt  
-      User.findOne({ id: jwt_payload.sub }, (err, user) => {
-        if (err) {
+  passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+    User.findOne({_id: jwt_payload.id}, (err, user)=>{
+      if (err) {
           return done(err, false);
-        }
-        if (user) {
+      }
+      if (user) {
           return done(null, user);
-        } else {
+      } else {
           return done(null, false);
           // or you could create a new account
-        }
-      });
-    })
-  );
+      }
+  });
+}));
 };
