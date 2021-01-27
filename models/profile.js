@@ -13,7 +13,7 @@ const ProfileSchema = schema({
     type: String,
     required: true,
   },
-  expense: {
+  expend: {
     type: String,
     required: true,
   },

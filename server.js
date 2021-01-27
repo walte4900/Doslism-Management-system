@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routers/apis/users");
 const profiles = require("./routers/apis/profiles");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 // 引入数据库
@@ -31,7 +32,8 @@ app.get("/",(req,res)=>{
 
 app.use("/api/users",users);
 app.use("/api/profiles",profiles);
-
+// 设置cookie的中间件
+app.use(cookieParser())
 
 
 const port = process.env.PORT || 5000;

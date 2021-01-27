@@ -42,7 +42,11 @@ router.post("/register", (req, res) => {
         // 写入数据库
         newUser
           .save()
-          .then((user) => res.json(user))
+          .then((user) => {
+            // 保证安全防xxs，csrf
+            res.cookie("name","doslism",{httpOnly:true});
+            res.json(user);
+          })
           .catch((err) => console.log(err));
       });
     });
@@ -73,6 +77,8 @@ router.post("/login", (req, res) => {
         };
         const key = keys.secretOrKey;
         jwt.sign(rule,key,{expiresIn: 3600},(err,token)=>{
+            // 保证安全防xxs，csrf
+            res.cookie("name","doslism",{httpOnly:true});
             res.json({
                 success: true,
                 token: "Bearer " + token
