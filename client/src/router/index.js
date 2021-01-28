@@ -1,23 +1,33 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Index from '../views/index'
+import Register from '../views/register'
+import NotFound from '../views/404'
 
 Vue.use(VueRouter)
 
 const routes = [
+  // 跳转页面设置
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/index',
+    component: Index
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/index',
+    name: 'index',
+    component: Index
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '*',
+    name: '404',
+    component: NotFound
+  },
 ]
 
 const router = new VueRouter({
